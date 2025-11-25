@@ -444,16 +444,39 @@ export const ExpenseCategoryMonth = memo(function ExpenseCategoryMonth({
             binding={envelopeBudget.catSumAmount(category.id)}
             type="financial"
           >
-            {props => (
-              <CellValueText
-                {...props}
-                className={css({
-                  cursor: 'pointer',
-                  ':hover': { textDecoration: 'underline' },
-                  ...makeAmountGrey(props.value),
-                })}
-              />
-            )}
+            {props => {
+              const budgetedValue = useEnvelopeSheetValue(
+                envelopeBudget.catBudgeted(category.id),
+              );
+              const percentage =
+                budgetedValue && budgetedValue !== 0
+                  ? Math.round((Math.abs(props.value) / budgetedValue) * 100)
+                  : 0;
+
+              return (
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                  <CellValueText
+                    {...props}
+                    className={css({
+                      cursor: 'pointer',
+                      ':hover': { textDecoration: 'underline' },
+                      ...makeAmountGrey(props.value),
+                    })}
+                  />
+                  {budgetedValue !== 0 && (
+                    <Text
+                      style={{
+                        fontSize: 11,
+                        color: theme.tableTextLight,
+                        fontWeight: 500,
+                      }}
+                    >
+                      ({percentage}%)
+                    </Text>
+                  )}
+                </View>
+              );
+            }}
           </EnvelopeCellValue>
         </View>
       </Field>
