@@ -13,6 +13,7 @@ This directory manages global application state using Redux Toolkit 2.10.
 The Redux store manages:
 
 ### App-Level State
+
 - User authentication status
 - Current budget file
 - UI preferences (theme, sidebar visibility)
@@ -21,7 +22,9 @@ The Redux store manages:
 - Loading/error states
 
 ### Feature-Specific State
+
 State is typically organized into slices by feature:
+
 - **Account state**: Selected account, filters
 - **Transaction state**: Selected transactions, edit mode
 - **Budget state**: Current month, selected categories
@@ -31,6 +34,7 @@ State is typically organized into slices by feature:
 ## When to Use Redux vs Local State
 
 ### Use Redux for:
+
 - Data shared across multiple pages/components
 - User preferences that persist across sessions
 - Modal open/close state (when modals affect app-wide state)
@@ -38,18 +42,21 @@ State is typically organized into slices by feature:
 - Current route/navigation state
 
 ### Use Local State for:
+
 - Form inputs (until submission)
 - UI toggles (dropdowns, tooltips) that don't affect other components
 - Temporary component state
 - Data from live queries (use hooks instead)
 
 ### Use Queries for:
+
 - Server data (accounts, transactions, budgets)
 - See [../queries/claude.md](../queries/claude.md) for query patterns
 
 ## Common Patterns
 
 ### Reading State
+
 ```tsx
 import { useSelector } from 'react-redux';
 import type { RootState } from '../redux/store';
@@ -64,6 +71,7 @@ function MyComponent() {
 ```
 
 ### Dispatching Actions
+
 ```tsx
 import { useDispatch } from 'react-redux';
 import { setTheme } from '../redux/prefsSlice'; // Example slice
@@ -80,6 +88,7 @@ function MyComponent() {
 ```
 
 ### Creating a Slice
+
 ```tsx
 // Example: prefsSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -101,7 +110,7 @@ const prefsSlice = createSlice({
     setTheme: (state, action: PayloadAction<'light' | 'dark'>) => {
       state.theme = action.payload;
     },
-    toggleSidebar: (state) => {
+    toggleSidebar: state => {
       state.sidebarOpen = !state.sidebarOpen;
     },
   },
@@ -114,6 +123,7 @@ export default prefsSlice.reducer;
 ## Testing with Redux
 
 ### Using Mock Store
+
 ```tsx
 import { render } from '@testing-library/react';
 import { MockReduxProvider } from '../redux/mock';
@@ -127,7 +137,7 @@ test('renders with Redux state', () => {
   render(
     <MockReduxProvider initialState={initialState}>
       <MyComponent />
-    </MockReduxProvider>
+    </MockReduxProvider>,
   );
 
   // Test component behavior
@@ -137,11 +147,13 @@ test('renders with Redux state', () => {
 ## State Persistence
 
 Some Redux state persists across sessions:
+
 - User preferences are saved to local storage
 - Budget file selection is remembered
 - UI state (sidebar position, etc.) persists
 
 Persistence is typically handled by middleware or selectors that sync with:
+
 - Browser localStorage (web)
 - Electron store (desktop)
 - Server preferences (synced across devices)
@@ -149,7 +161,9 @@ Persistence is typically handled by middleware or selectors that sync with:
 ## Debugging Redux
 
 ### Redux DevTools
+
 Redux DevTools are enabled in development:
+
 1. Install Redux DevTools browser extension
 2. Open DevTools panel
 3. View state, actions, and time-travel debug
@@ -157,16 +171,19 @@ Redux DevTools are enabled in development:
 ### Common Issues
 
 **State not updating?**
+
 - Check if action is dispatched (`console.log` in reducer)
 - Verify selector is pointing to correct state path
 - Ensure component is wrapped in Redux Provider
 
 **Stale state in component?**
+
 - Check if using correct selector
 - Verify state is actually changing in Redux DevTools
 - Check for memo/shallow equality issues
 
 **Performance issues?**
+
 - Use `useSelector` with specific selectors (avoid selecting entire state)
 - Use `reselect` for derived/computed state
 - Consider moving local UI state out of Redux

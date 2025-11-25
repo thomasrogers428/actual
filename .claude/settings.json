@@ -17,9 +17,8 @@
     // Writing files will still prompt
     "allowWriteFile": false,
 
-    // Editing files will prompt 
+    // Editing files will prompt
     "allowEditFile": false,
-
 
     // ============================================
     // COMMAND EXECUTION - Selective prompts
@@ -27,18 +26,33 @@
 
     // Allow safe read-only commands without prompts
     "allowedCommands": [
-      "ls", "cat", "pwd", "echo", "grep", "find", "which",
-      "git status", "git log", "git diff", "git branch",
-      "yarn --version", "node --version", "npm --version"
+      "ls",
+      "cat",
+      "pwd",
+      "echo",
+      "grep",
+      "find",
+      "which",
+      "git status",
+      "git log",
+      "git diff",
+      "git branch",
+      "yarn --version",
+      "node --version",
+      "npm --version"
     ],
 
     // These commands will prompt (demonstrates permission system)
     "promptForCommands": [
-      "git commit", "git push", "git pull",
-      "yarn install", "npm install",
-      "rm", "mv", "cp"
+      "git commit",
+      "git push",
+      "git pull",
+      "yarn install",
+      "npm install",
+      "rm",
+      "mv",
+      "cp"
     ],
-
 
     // ============================================
     // NETWORK & EXTERNAL ACCESS
@@ -50,17 +64,12 @@
     // API calls prompt for review (shows user control)
     "promptForApiCalls": true,
 
-
     // ============================================
     // DEVELOPMENT WORKFLOW
     // ============================================
 
     // Auto-approve test runs (smooth demo flow)
-    "allowedTestCommands": [
-      "yarn test",
-      "yarn test:budget",
-      "npm test"
-    ],
+    "allowedTestCommands": ["yarn test", "yarn test:budget", "npm test"],
 
     // Build commands can run without prompts
     "allowBuildCommands": true,
@@ -68,21 +77,19 @@
     // Linting and formatting are safe
     "allowLintCommands": true,
 
-
     // ============================================
     // SENSITIVE OPERATIONS - Always prompt
     // ============================================
 
     // These ALWAYS require explicit approval:
     "alwaysPromptFor": [
-      "database-modifications",    // Changing SQLite schema
-      "environment-variables",     // Reading .env files
-      "credential-access",         // Accessing API keys
-      "file-deletion",            // rm, delete operations
-      "system-config",            // Modifying system settings
-      "dependency-changes"        // package.json modifications
+      "database-modifications", // Changing SQLite schema
+      "environment-variables", // Reading .env files
+      "credential-access", // Accessing API keys
+      "file-deletion", // rm, delete operations
+      "system-config", // Modifying system settings
+      "dependency-changes" // package.json modifications
     ],
-
 
     // ============================================
     // DEMO-SPECIFIC SETTINGS
@@ -101,7 +108,6 @@
     "verboseLogging": true
   },
 
-
   // ============================================
   // CONTEXT & INTELLIGENCE
   // ============================================
@@ -115,6 +121,5 @@
 
     // Use project-specific vocabulary
     "useProjectGlossary": true
-  },
-
+  }
 }

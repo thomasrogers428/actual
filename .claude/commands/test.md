@@ -3,6 +3,7 @@ description: Run the full test suite
 ---
 
 Run the test suite using:
+
 ```bash
 yarn test
 ```
