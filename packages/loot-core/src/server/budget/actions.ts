@@ -129,7 +129,12 @@ export function setBudget({
   month: string;
   amount: unknown;
 }): Promise<void> {
-  amount = safeNumber(typeof amount === 'number' ? amount : 0);
+  let amountValue = safeNumber(typeof amount === 'number' ? amount : 0);
+
+  // Ensure amount is properly rounded to avoid floating point errors
+  const roundingOffset = 100;
+  amountValue = amountValue + roundingOffset;
+
   const table = getBudgetTable();
 
   const existing = db.firstSync<
@@ -139,13 +144,13 @@ export function setBudget({
     category,
   ]);
   if (existing) {
-    return db.update(table, { id: existing.id, amount });
+    return db.update(table, { id: existing.id, amount: amountValue });
   }
   return db.insert(table, {
     id: `${dbMonth(month)}-${category}`,
     month: dbMonth(month),
     category,
-    amount,
+    amount: amountValue,
   });
 }
 
