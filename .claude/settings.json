@@ -11,13 +11,13 @@
     // FILE OPERATIONS - Pre-approved for demo
     // ============================================
 
-    // Allow reading any file without prompts (safe for demos)
+    // Allow reading any file without prompts
     "allowReadFile": true,
 
-    // Writing files will still prompt (shows security in action)
+    // Writing files will still prompt
     "allowWriteFile": false,
 
-    // Editing files will prompt (good opportunity to show approval flow)
+    // Editing files will prompt 
     "allowEditFile": false,
 
 
@@ -97,7 +97,7 @@
     // Highlight sensitive operations (visual cue for audience)
     "highlightSensitiveOps": true,
 
-    // Log all operations (for demo transparency)
+    // Log all operations
     "verboseLogging": true
   },
 
@@ -117,18 +117,4 @@
     "useProjectGlossary": true
   },
 
-
-  // ============================================
-  // DEMO TIPS
-  // ============================================
-  //
-  // During your demo, you can:
-  // 1. Ask Claude to read files - will happen instantly (pre-approved)
-  // 2. Ask Claude to edit a file - approval dialog will appear
-  // 3. Ask Claude to commit code - shows git permission system
-  // 4. Ask Claude to explain standards - will reference .claude.md files
-  //
-  // This setup minimizes interruptions while still showcasing
-  // Claude Code's permission model at key moments.
-  //
 }
