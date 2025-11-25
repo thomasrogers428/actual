@@ -1,0 +1,134 @@
+{
+  // Claude Code Settings for Actual Budget Demo
+  //
+  // This configuration is optimized for demonstrations:
+  // - Some permissions are pre-approved to reduce interruptions
+  // - Others still prompt to showcase the permission system
+  // - Balance between security and smooth demo flow
+
+  "permissions": {
+    // ============================================
+    // FILE OPERATIONS - Pre-approved for demo
+    // ============================================
+
+    // Allow reading any file without prompts (safe for demos)
+    "allowReadFile": true,
+
+    // Writing files will still prompt (shows security in action)
+    "allowWriteFile": false,
+
+    // Editing files will prompt (good opportunity to show approval flow)
+    "allowEditFile": false,
+
+
+    // ============================================
+    // COMMAND EXECUTION - Selective prompts
+    // ============================================
+
+    // Allow safe read-only commands without prompts
+    "allowedCommands": [
+      "ls", "cat", "pwd", "echo", "grep", "find", "which",
+      "git status", "git log", "git diff", "git branch",
+      "yarn --version", "node --version", "npm --version"
+    ],
+
+    // These commands will prompt (demonstrates permission system)
+    "promptForCommands": [
+      "git commit", "git push", "git pull",
+      "yarn install", "npm install",
+      "rm", "mv", "cp"
+    ],
+
+
+    // ============================================
+    // NETWORK & EXTERNAL ACCESS
+    // ============================================
+
+    // Allow fetching docs and web content (useful for research)
+    "allowWebFetch": true,
+
+    // API calls prompt for review (shows user control)
+    "promptForApiCalls": true,
+
+
+    // ============================================
+    // DEVELOPMENT WORKFLOW
+    // ============================================
+
+    // Auto-approve test runs (smooth demo flow)
+    "allowedTestCommands": [
+      "yarn test",
+      "yarn test:budget",
+      "npm test"
+    ],
+
+    // Build commands can run without prompts
+    "allowBuildCommands": true,
+
+    // Linting and formatting are safe
+    "allowLintCommands": true,
+
+
+    // ============================================
+    // SENSITIVE OPERATIONS - Always prompt
+    // ============================================
+
+    // These ALWAYS require explicit approval:
+    "alwaysPromptFor": [
+      "database-modifications",    // Changing SQLite schema
+      "environment-variables",     // Reading .env files
+      "credential-access",         // Accessing API keys
+      "file-deletion",            // rm, delete operations
+      "system-config",            // Modifying system settings
+      "dependency-changes"        // package.json modifications
+    ],
+
+
+    // ============================================
+    // DEMO-SPECIFIC SETTINGS
+    // ============================================
+
+    // Show permission rationale (educates viewers)
+    "showPermissionRationale": true,
+
+    // Brief delay before auto-approving (makes it visible in demo)
+    "permissionDisplayDelayMs": 500,
+
+    // Highlight sensitive operations (visual cue for audience)
+    "highlightSensitiveOps": true,
+
+    // Log all operations (for demo transparency)
+    "verboseLogging": true
+  },
+
+
+  // ============================================
+  // CONTEXT & INTELLIGENCE
+  // ============================================
+
+  "context": {
+    // Include .claude.md files for company standards
+    "includeClaudeMarkdown": true,
+
+    // Reference relevant docs automatically
+    "autoIncludeRelevantDocs": true,
+
+    // Use project-specific vocabulary
+    "useProjectGlossary": true
+  },
+
+
+  // ============================================
+  // DEMO TIPS
+  // ============================================
+  //
+  // During your demo, you can:
+  // 1. Ask Claude to read files - will happen instantly (pre-approved)
+  // 2. Ask Claude to edit a file - approval dialog will appear
+  // 3. Ask Claude to commit code - shows git permission system
+  // 4. Ask Claude to explain standards - will reference .claude.md files
+  //
+  // This setup minimizes interruptions while still showcasing
+  // Claude Code's permission model at key moments.
+  //
+}
